@@ -2,8 +2,11 @@ package com.keysoft.entity;
 import javax.persistence.*;
 
 @Entity
-//@MappedSuperclass
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@NamedStoredProcedureQuery(name = "findByRelease",procedureName = "FIND_TICKET_BY_RELEASE",
+        resultClasses = {Ticket.class},parameters = {
+        @StoredProcedureParameter(name = "p_id",type = Integer.class,mode = ParameterMode.IN)
+})
 public class Ticket {
 
     @Id
@@ -19,7 +22,7 @@ public class Ticket {
     private Application application;
 
     @ManyToOne
-    @JoinTable(name = "ticket_release",joinColumns = @JoinColumn(name = "ticket_fk"),inverseJoinColumns = @JoinColumn(name = "release_fk"))
+    @JoinColumn(name = "release_id")
     private Release release;
 
     private String status;

@@ -150,5 +150,11 @@ public class TrackZillaController {
         return new ResponseEntity<>(enhancementList,HttpStatus.OK);
     }
 
+    @GetMapping("/findTicketsByReleaseId/{id}")
+    public ResponseEntity<List<Ticket>> findTicketsByReleaseId(@PathVariable("id") int releaseId) {
+        List<Ticket> ticketsList = ticketService.findTicketsByReleaseId(releaseId);
+        return new ResponseEntity<>(ticketsList,HttpStatus.OK);
+    }
+
 
 }

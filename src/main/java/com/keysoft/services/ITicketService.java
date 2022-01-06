@@ -16,4 +16,6 @@ public interface ITicketService {
     void deleteTicket(Integer id);
 
     void closeTicket(Integer id);
+
+    List<Ticket> findTicketsByReleaseId(int releaseId);
 }

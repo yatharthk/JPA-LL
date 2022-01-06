@@ -58,4 +58,9 @@ public class TicketDao implements ITicketDao{
      Ticket ticket = getTicketById(id);
      ticket.setStatus("Resolved");
     }
+
+    @Override
+    public List<Ticket> findByReleaseId(int releaseId) {
+        return (List<Ticket>) entityManager.createNamedStoredProcedureQuery("findByRelease").setParameter("p_id",releaseId).getResultList();
+    }
 }

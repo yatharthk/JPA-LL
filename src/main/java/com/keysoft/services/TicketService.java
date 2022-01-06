@@ -42,4 +42,9 @@ public class TicketService implements ITicketService{
     public void closeTicket(Integer id) {
         ticketDao.closeTicket(id);
     }
+
+    @Override
+    public List<Ticket> findTicketsByReleaseId(int releaseId) {
+        return ticketDao.findByReleaseId(releaseId);
+    }
 }
