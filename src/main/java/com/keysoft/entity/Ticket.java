@@ -18,8 +18,8 @@ public class Ticket {
     @JoinColumn(name = "application_id")
     private Application application;
 
-    @ManyToOne
-    @JoinTable(name = "ticket_release",joinColumns = @JoinColumn(name = "ticket_fk"),inverseJoinColumns = @JoinColumn(name = "release_fk"))
+    @OneToMany
+    @JoinColumn(name = "release_id")
     private Release release;
 
     private String status;
