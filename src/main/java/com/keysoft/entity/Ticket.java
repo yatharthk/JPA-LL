@@ -1,9 +1,8 @@
 package com.keysoft.entity;
 import javax.persistence.*;
 
-// @Entity
+
 @MappedSuperclass
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Ticket {
 
     @Id
