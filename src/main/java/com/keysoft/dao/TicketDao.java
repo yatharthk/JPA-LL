@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Transactional
@@ -28,7 +29,7 @@ public class TicketDao implements ITicketDao{
         //class name is case-sensitive; use field names - column names
         String selectQuery = "Select t from Ticket t order by t.title";
         Query query =  entityManager.createQuery(selectQuery);
-        return (List<Ticket>) query.getResultList();
+        return (List<Ticket>) query.getResultStream().collect(Collectors.toList());
 
     }
 
