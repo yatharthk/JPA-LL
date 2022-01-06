@@ -144,4 +144,11 @@ public class TrackZillaController {
     }
 
 
+    @GetMapping("/ticketsWithApps")
+    public ResponseEntity<List<Enhancement>> getTicketsWithApps() {
+        List<Enhancement> enhancementList=enhancementService.getTicketsWithApps();
+        return new ResponseEntity<>(enhancementList,HttpStatus.OK);
+    }
+
+
 }
