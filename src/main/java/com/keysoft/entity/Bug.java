@@ -1,8 +1,10 @@
 package com.keysoft.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQuery(name = "Bug.findSevereBugs",query = "Select t from Ticket t where t.severity = 1")
 public class Bug extends Ticket {
 
     private Integer severity;

@@ -1,7 +1,4 @@
 package com.keysoft.entity;
-
-import jdk.jfr.Enabled;
-import jdk.jfr.Threshold;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;

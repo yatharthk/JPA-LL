@@ -5,6 +5,8 @@ import com.keysoft.entity.Bug;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BugService implements IBugService{
 
@@ -14,5 +16,10 @@ public class BugService implements IBugService{
     @Override
     public void addBug(Bug bug) {
         bugDao.addBug(bug);
+    }
+
+    @Override
+    public List<Bug> getSevereBugs() {
+        return bugDao.getSevereBugs();
     }
 }

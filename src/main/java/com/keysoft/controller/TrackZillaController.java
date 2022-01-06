@@ -127,6 +127,13 @@ public class TrackZillaController {
 
     }
 
+    @GetMapping("/severeBugs")
+    public ResponseEntity<List<Bug>> getSevereBugs() {
+        List<Bug> severeBugsList=bugService.getSevereBugs();
+        return new ResponseEntity<>(severeBugsList,HttpStatus.OK);
+
+    }
+
     @PostMapping("/enhancement")
     public ResponseEntity<Void> addEnhancement(@RequestBody Enhancement enhancement, UriComponentsBuilder builder) {
         enhancementService.addEnhancement(enhancement);
