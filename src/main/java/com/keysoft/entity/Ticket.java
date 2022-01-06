@@ -18,7 +18,7 @@ public class Ticket {
     @JoinColumn(name = "application_id")
     private Application application;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "release_id")
     private Release release;
 
