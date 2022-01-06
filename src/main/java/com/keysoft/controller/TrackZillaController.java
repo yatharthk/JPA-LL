@@ -1,12 +1,8 @@
 package com.keysoft.controller;
 
 
-import com.keysoft.entity.Application;
-import com.keysoft.entity.Release;
-import com.keysoft.entity.Ticket;
-import com.keysoft.services.IApplicationService;
-import com.keysoft.services.IReleaseService;
-import com.keysoft.services.ITicketService;
+import com.keysoft.entity.*;
+import com.keysoft.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,10 +25,16 @@ public class TrackZillaController {
     @Autowired
     private IReleaseService releaseService;
 
+    @Autowired
+    private IBugService bugService;
+
+    @Autowired
+    private IEnhancementService enhancementService;
+
     @PostMapping("/application")
     public ResponseEntity<Void> addApplication(@RequestBody Application application, UriComponentsBuilder builder) {
         boolean flag= applicationService.addApplication(application);
-        if(!flag) return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+        if(!flag) return new ResponseEntity<>(HttpStatus.CONFLICT);
 
         HttpHeaders httpHeaders= new HttpHeaders();
         httpHeaders.setLocation(builder.path("/application/{id}").buildAndExpand(application.getId()).toUri());
@@ -42,14 +44,14 @@ public class TrackZillaController {
     @GetMapping("/application/{id}")
     public ResponseEntity<Application> getApplicationById(@PathVariable("id") int id) {
         Application application = applicationService.getApplicationById(id);
-        return new ResponseEntity<Application>(application,HttpStatus.OK);
+        return new ResponseEntity<>(application,HttpStatus.OK);
 
     }
 
     @PutMapping("/application")
     public ResponseEntity<Application> updateApplication(@RequestBody Application application) {
         applicationService.updateApplication(application);
-        return new ResponseEntity<Application>(application,HttpStatus.OK);
+        return new ResponseEntity<>(application,HttpStatus.OK);
     }
 
     @DeleteMapping("/application/{id}")
@@ -114,6 +116,24 @@ public class TrackZillaController {
     public ResponseEntity<Void> addAppToRelease(@PathVariable("appId") Integer appId,@PathVariable("releaseId") Integer releaseId,UriComponentsBuilder builder) {
         releaseService.addApplication(appId,releaseId);
         return  new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/bug")
+    public ResponseEntity<Void> addBug(@RequestBody Bug bug,UriComponentsBuilder builder) {
+        bugService.addBug(bug);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(builder.path("/bug").buildAndExpand(bug.getId()).toUri());
+        return  new ResponseEntity<>(headers,HttpStatus.CREATED);
+
+    }
+
+    @PostMapping("/enhancement")
+    public ResponseEntity<Void> addEnhancement(@RequestBody Enhancement enhancement, UriComponentsBuilder builder) {
+        enhancementService.addEnhancement(enhancement);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(builder.path("/enhancement").buildAndExpand(enhancement.getId()).toUri());
+        return  new ResponseEntity<>(headers,HttpStatus.CREATED);
+
     }
 
 
